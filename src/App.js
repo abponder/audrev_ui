@@ -19,7 +19,7 @@ function App() {
   return (
     <div>
       {testdata.map((obj, idx) => (
-        <div>{obj.ProvName}</div>
+        <div key={idx}>{obj.MedCenter}</div>
       ))}
     </div>
   );
