@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CallBack</title>
+    <link rel="stylesheet" href="App.css">
+  </head>
+  <body>
+    <h6 id="clocker1">00:00:00</h6>
+    <h2>JavaScript Callbacks</h2>
+
+    <p>Do a calculation and then display the result.</p>
+    
+    <p id="demo"></p>
+
+    <p>The problem with the first example above, is that you have to call two functions to display the result.</p>
+    <p>The problem with the second example, is that you cannot prevent the calculator function from displaying the result.</p>
+    <p>Now it is time to bring in a callback.</p>
+    
+    <script>
+    function myDisplayer(some) {
+      document.getElementById("demo").innerHTML = some;
+    }
+    
+    function myCalculator(num1, num2, myCallback) {
+      let sum = num1 + num2;
+      myCallback(sum);
+    }
+    
+    myCalculator(5, 5, myDisplayer);
+    </script>
+    <h1 id="demo"></h1>
+
+    <script>
+    setInterval(myFunction, 1000);
+    
+    function myFunction() {
+      let d = new Date();
+      document.getElementById("clocker1").innerHTML= `${d.getHours()}:${d.getMinutes()}:${('0' + (d.getSeconds())).slice(-2)}`;
+    }
+    </script>
+
+<!-- //("0" + (this.getMonth() + 1)).slice(-2) -->
+</body>
+</html>

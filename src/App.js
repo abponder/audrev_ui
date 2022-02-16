@@ -1,9 +1,11 @@
 import './App.css';
+import Nav from './Nav.js';
 import axios from 'axios';
 import React, {
   useState,
   useEffect
 } from 'react';
+
 
 
 function App() {
@@ -18,9 +20,10 @@ function App() {
   },[])
   return (
     <div>
-      {testdata.map((obj, idx) => (
+      <Nav />
+      {/* {testdata.map((obj, idx) => (
         <div key={idx}>{obj.MedCenter}</div>
-      ))}
+      ))} */}
     </div>
   );
 }
