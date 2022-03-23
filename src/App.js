@@ -9,15 +9,15 @@ import React, {
 
 
 function App() {
-  const [testdata, settestdata] = useState([]);
-  useEffect(()=> {
-    async function fetchdata(){
-      const response = await axios.get('/api')
-      console.log(response)
-      settestdata(response.data)
-    }
-    fetchdata()
-  },[])
+  // const [testdata, settestdata] = useState([]);
+  // useEffect(()=> {
+  //   async function fetchdata(){
+  //     const response = await axios.get('/api')
+  //     console.log(response)
+  //     settestdata(response.data)
+  //   }
+  //   fetchdata()
+  // },[])
   return (
     <div>
       <Nav />

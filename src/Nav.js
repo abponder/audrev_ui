@@ -1,6 +1,7 @@
 import './App.css';
 import axios from 'axios';
 import Provlist from './Provlist'
+import Provmed from './Provmed'
 import Edulist from './Edulist'
 import React, {
   useState,
@@ -88,6 +89,9 @@ function Nav() {
           </Route>
           <Route path="/ods">
             <p>Hello ODS Team</p>
+          </Route>
+          <Route path="/provmed">
+            <Provmed />
           </Route>
         </Switch>
       </div>
