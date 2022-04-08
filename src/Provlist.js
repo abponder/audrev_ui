@@ -40,7 +40,7 @@ function Provlist() {
     {provdata.map((obj, idx) => (
         <tr>
           <td >
-          <Link to="/provmed">{obj.MedCtr}</Link>
+          <Link to={{pathname:"/provmed",state:{medctr:obj.MedCtr, provdata}}}>{obj.MedCtr}</Link>
           </td>
           <td >{obj.TotalOpen}</td>
           <td >{obj.TotalCompleted}</td>
