@@ -13,6 +13,8 @@ function Provmed2() {
   const [provdata, setprovdata] = useState([]);
   const [tblheadings, settblheadings] = useState([]);
   const location = useLocation();
+  const [showform, setshowform] = useState(false)
+  const [currentformdata, setcurrentformdata] = useState(null)
   // console.log('test')
   console.log(location.state)
   useEffect(()=> {
@@ -25,6 +27,12 @@ function Provmed2() {
     fetchdata2()
   },[]) 
 
+  const handleclick = (e, rowData) => {
+    e.preventDefault() //stops page from refreshing
+    console.log("clicked", rowData)
+    setshowform(true)
+    setcurrentformdata(rowData)
+  }
 
   return (
     <div>
@@ -33,7 +41,13 @@ function Provmed2() {
       <h4>PROVIDER: {location.state.provider}</h4>
       <h4>Medical Center: {location.state.MOB}</h4>
       <br></br>
-      <table>
+      {showform && (
+        <p>this is form spot {currentformdata.comments}</p>
+        // <form>
+
+        // </form>
+      )}
+      {!showform && <table>
       <thead>
         <tr>{tblheadings.slice(1,7,8).map((key, index) => {
         return <th key={index}>{key.toUpperCase()}</th>
@@ -42,8 +56,8 @@ function Provmed2() {
     <tbody>
     {provdata.map((obj, idx) => (
           
-        <tr key={idx}>
-          <td ><Link to={{pathname:"/provmed3",state:{idnewprov:obj.ID_newprov, idphase:obj.ID_phase}}}>{obj.ID_newprov}</Link></td>
+        <tr onClick={(e)=>handleclick(e,obj)} key={idx}>
+          <td >{obj.ID_newprov}</td>
           <td >{obj.phase}</td>
           <td >{obj.status}</td>
           <td >{obj.status_date}</td>
@@ -53,7 +67,7 @@ function Provmed2() {
       
        ))} 
     </tbody>
-</table>
+</table>}
      
     </div>
   );
