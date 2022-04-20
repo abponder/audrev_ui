@@ -9,7 +9,7 @@ import {useLocation, Link} from "react-router-dom";
 
 // https://codebrahma.com/build-table-componenet-with-react-hooks/
 
-function Provmed2() {
+function Provmed3() {
   const [provdata, setprovdata] = useState([]);
   const [tblheadings, settblheadings] = useState([]);
   const location = useLocation();
@@ -17,8 +17,8 @@ function Provmed2() {
   console.log(location.state)
   useEffect(()=> {
     async function fetchdata2(){
-      const response = await axios.get(`/api/provmed2/${location.state.ID_newprov}`)
-      console.log((response.data))
+      const response = await axios.get(`/api/provmed3/${location.state.idnewprov}/${location.state.idphase}`)
+      console.log(Object.keys(response.data))
       settblheadings(Object.keys(response.data[0]))
       setprovdata(response.data)
     }
@@ -43,7 +43,7 @@ function Provmed2() {
     {provdata.map((obj, idx) => (
           
         <tr key={idx}>
-          <td ><Link to={{pathname:"/provmed3",state:{idnewprov:obj.ID_newprov, idphase:obj.ID_phase}}}>{obj.ID_newprov}</Link></td>
+          <td ><Link to={{pathname:"/provmed3",state:{medctr:obj.MedCtr, provdata}}}>{obj.ID_newprov}</Link></td>
           <td >{obj.phase}</td>
           <td >{obj.status}</td>
           <td >{obj.status_date}</td>
@@ -59,4 +59,4 @@ function Provmed2() {
   );
 }
 
-export default Provmed2;
+export default Provmed3;

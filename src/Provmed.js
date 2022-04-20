@@ -47,10 +47,10 @@ function Provmed() {
           <td >{obj.MedCtr}</td>
           <td >{obj.MOB}</td>
           <td >
-            <Link to={{pathname:"/provmed2",state:{ID_newprov:obj.ID, provdata}}}>
+            <Link to={{pathname:"/provmed2",state:{ID_newprov:obj.ID, MOB:obj.MOB, provider:obj.Provider, provdata}}}>
             {obj.Provider}
             </Link>
-          </td>
+          </td> 
           <td >{obj.Role}</td>
           <td >{obj.Specialty}</td>
           <td >{obj.HireDate}</td>
