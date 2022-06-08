@@ -18,7 +18,7 @@ function Provmed2() {
   const [inputs, setInputs] = useState({});
   const [statuses, setstatuses] = useState([]);
   // console.log('test')
-  console.log(location.state)
+  // console.log(location.state)
   useEffect(()=> {
     async function fetchdata2(){
       const response = await axios.get(`/api/provmed2/${location.state.ID_newprov}`)
@@ -40,13 +40,23 @@ function Provmed2() {
     setInputs(rowData)
   }
 
-  const handleSubmit = (e, topic) => {
-    
+  const handleSubmit = async (e, topic) => {
     e.preventDefault()
-    console.log(inputs)
+    await axios.put(`/api/provmed2/edit`,inputs)
+    const updatedProvdata = provdata.map(record => {
+      if (record.ID_phase === inputs.ID_phase) {
+        return inputs
+      }
+      return record
+    })
+    setprovdata(updatedProvdata)
+    console.log("submit", [inputs])
+    setshowform(false)
   }
 
   const handleChange = (e) => {
+    console.log("etargetname",e.target.name)
+    console.log("etargetvalue",e.target.value)
     const name = e.target.name;
     const value = e.target.value;
     setInputs(values => ({...values, [name]: value}))
@@ -90,7 +100,6 @@ function Provmed2() {
           {statuses.map(status =>(
             <option value={status.statusDesc}>{status.statusDesc}</option>
           ))}
-          <br />
         </select>
         {/* <label>Status:
         <br />
