@@ -35,13 +35,12 @@ function Provmed() {
       <table>
       <thead>
         <tr>{tblheadings.map((key, index) => {
-        return <th key={index}>{key.toUpperCase()}</th>
-    })}</tr>
+          return <th key={index}>{key.toUpperCase()}</th>
+          })}
+        </tr>
       </thead>
     <tbody>
     {provdata.map((obj, idx) => (
-          
-       
         <tr key={idx}>
           <td >{obj.ID}</td>
           <td >{obj.MedCtr}</td>

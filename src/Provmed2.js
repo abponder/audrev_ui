@@ -18,7 +18,7 @@ function Provmed2() {
   const [inputs, setInputs] = useState({});
   const [statuses, setstatuses] = useState([]);
   // console.log('test')
-  // console.log(location.state)
+  console.log("location:", useLocation())
   useEffect(()=> {
     async function fetchdata2(){
       const response = await axios.get(`/api/provmed2/${location.state.ID_newprov}`)
