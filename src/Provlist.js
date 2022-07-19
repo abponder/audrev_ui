@@ -22,7 +22,7 @@ function Provlist() {
     async function fetchdata(){
       const response = await axios.get('/api/provlist')
       const providers = await axios.get('/api/providers')
-      //console.log(response)
+      console.log('providers: ', providers)
       settblheadings(Object.keys(response.data[0]))
       setprovdata(response.data)
       setInputs({provider:providers.data[0].ProvName})
@@ -94,9 +94,9 @@ function Provlist() {
         <br />
         <label for="providers">Providers:</label>
         <br />
-        <select name='provider' onChange={handleChange} value={inputs.provider} >
+        <select name='provider' onChange={handleChange} >
           {providers.map(provider =>(
-          <option value={provider.ProvName}>{provider.ProvName}</option>
+          <option key={provider.ProvName} value={provider.ProvName}>{provider.ProvName}</option>
           ))}
         </select>
         
