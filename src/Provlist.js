@@ -25,8 +25,8 @@ function Provlist() {
       console.log('providers: ', providers)
       settblheadings(Object.keys(response.data[0]))
       setprovdata(response.data)
-      setInputs({provider:providers.data[0].ProvName})
       setproviders(providers.data)
+      setInputs({provider:"Please make a selection"})
     }
     fetchdata()
   },[]) 
@@ -38,19 +38,26 @@ function Provlist() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log("submit", inputs)
-    await axios.post(`/api/addmtg`,inputs)
+    const fullprovider = providers.find(provider => {
+      console.log(provider)
+      return provider.ProvName === inputs.provider
+    })
+    console.log("fullprovider", fullprovider)
+    await axios.post(`/api/addmtg`,{ ...fullprovider, reviewer:inputs.reviewer})
     const updatedProvdata = provdata.map(record => {
       if (record.ID_phase === inputs.ID_phase) {
         return inputs
       }
-      // return record
+      return record
     })
     setprovdata(updatedProvdata)
-    // console.log("submit", [inputs])
+    console.log("submit49", [inputs])
+    setInputs({provider:"Please make a selection"})
     setshowform(false)
   }
   const handleChange = (e) => {
-    console.log("providers",inputs.providers)
+    console.log("inputs provider",inputs.providers)
+    console.log("inputs reviewer",inputs.reviewer)
     console.log("etargetname",e.target.name)
     console.log("etargetvalue",e.target.value)
     const name = e.target.name;
@@ -95,6 +102,7 @@ function Provlist() {
         <label for="providers">Providers:</label>
         <br />
         <select name='provider' onChange={handleChange} >
+          <option>Please make a selection</option>
           {providers.map(provider =>(
           <option key={provider.ProvName} value={provider.ProvName}>{provider.ProvName}</option>
           ))}
@@ -115,8 +123,11 @@ function Provlist() {
         <br />
         <br />
           
-          <input type="button" value="Cancel" onClick={()=> setshowform(false)} />
-          <input type="submit" />
+          <input type="button" value="Cancel" onClick={()=> {
+            setshowform(false)
+            setInputs({provider:"Please make a selection"})
+          }} />
+          <input type="submit" disabled={inputs.provider==="Please make a selection"} />
 
       </form>
       )}
