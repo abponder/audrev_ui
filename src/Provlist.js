@@ -44,14 +44,16 @@ function Provlist() {
     })
     console.log("fullprovider", fullprovider)
     await axios.post(`/api/addmtg`,{ ...fullprovider, reviewer:inputs.reviewer})
-    const updatedProvdata = provdata.map(record => {
-      if (record.ID_phase === inputs.ID_phase) {
-        return inputs
-      }
-      return record
-    })
-    setprovdata(updatedProvdata)
-    console.log("submit49", [inputs])
+    const response = await axios.get('/api/provlist')
+    // const updatedProvdata = provdata.map(record => {
+    //   console.log("record", record)
+    //   if (record.ID_phase === inputs.ID_phase) {
+    //     return inputs
+    //   }
+    //   return record
+    // })
+    setprovdata(response.data)
+    // console.log("updatedProvdata", updatedProvdata)
     setInputs({provider:"Please make a selection"})
     setshowform(false)
   }

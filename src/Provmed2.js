@@ -42,6 +42,7 @@ function Provmed2() {
 
   const handleSubmit = async (e, topic) => {
     e.preventDefault()
+    console.log("inputs", inputs)
     await axios.put(`/api/provmed2/edit`,inputs)
     const updatedProvdata = provdata.map(record => {
       if (record.ID_phase === inputs.ID_phase) {
@@ -50,7 +51,16 @@ function Provmed2() {
       return record
     })
     setprovdata(updatedProvdata)
-    console.log("submit", [inputs])
+    console.log("updatedProvdata 1", updatedProvdata)
+    const overallstatus = updatedProvdata.filter(prov => prov.status === "Completed" || prov.status === "Training not Provided").length===3
+    console.log("overallstatus", overallstatus)
+
+      await axios.put(`/api/provmed2/completed`,{
+        status:overallstatus? "Completed":"In Progress",
+        ID_newprov:updatedProvdata[0].ID_newprov
+      })
+    
+    console.log("updatedProvdata ID", updatedProvdata[0].ID_newprov)
     setshowform(false)
   }
 
