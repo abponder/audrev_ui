@@ -18,6 +18,13 @@ import {
 
 function Nav() {
   const [responsivenav, setresponsivenav] = useState("topnav")
+  const [activelink, setactivelink] = useState("home")
+
+  const handleClick = (e) => {
+    console.log(e.target.id)
+    setactivelink(e.target.id)
+  }
+
   return (
     <div>
  <div className="header">
@@ -30,13 +37,13 @@ function Nav() {
   <nav className="navbar">
   <div className={responsivenav} id="myTopnav">
 
-    <Link className="active" to="/home">Home</Link>
-    <Link className="notactive" to="/opsmon">Operational Monitoring</Link>
-    <Link className="notactive" to="/newprov">New Provider Training</Link>
-    <Link className="notactive" to="/edoutreach">Education & Outreach</Link>
-    <Link className="notactive" to="/appeals">Appeals</Link>
-    <Link className="notactive" to="/comprpt">Completion Report</Link>
-    <Link className="notactive" to="/region">Region</Link>
+  <Link className={activelink==="home"?"active":"notactive"} to="/home" id="home" onClick={handleClick}>Home</Link>
+    <Link className={activelink==="opsmon"?"active":"notactive"} to="/opsmon" id="opsmon" onClick={handleClick}>Operational Monitoring</Link>
+    <Link className={activelink==="newprov"?"active":"notactive"} to="/newprov" id="newprov"  onClick={handleClick}>New Provider Training</Link>
+    <Link className={activelink==="edoutreach"?"active":"notactive"} to="/edoutreach" id="edoutreach" onClick={handleClick}>Education & Outreach</Link>
+    <Link className={activelink==="appeals"?"active":"notactive"} to="/appeals" id="appeals" onClick={handleClick}>Appeals</Link>
+    <Link className={activelink==="comprpt"?"active":"notactive"} to="/comprpt" id="comprpt" onClick={handleClick}>Completion Report</Link>
+    <Link className={activelink==="region"?"active":"notactive"} to="/region" id="region" onClick={handleClick}>Region</Link>
     <div className="dropdown right">
       <button className="dropbtn">Logout/Help 
         <i className="fa fa-caret-down"></i>
