@@ -30,7 +30,7 @@ function Nav() {
  <div className="header">
      {/* <!-- <img src="building1.jpg" alt="building"> --> */}
      <h2>The Department</h2>
-     <p>This is some words, and more words</p>
+     <p>This is some words, and more wordses</p>
   </div>
 
   <Router>
