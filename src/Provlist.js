@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 // https://codebrahma.com/build-table-componenet-with-react-hooks/
-//commentss
+//commentsss
 function Provlist() {
   const [provdata, setprovdata] = useState([]);
   const [providers, setproviders] = useState([]);
