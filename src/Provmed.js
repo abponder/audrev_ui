@@ -17,7 +17,7 @@ function Provmed() {
   const [medctrchoice, setmedctrchoice] = useState('');
   const [curritem, setcurritem] = useState([]);
   const [citydata, setcitydata] = useState({});
-  console.log('test')
+ // console.log('test')
   console.log(location.state)
   useEffect(()=> {
     async function fetchdata(){
