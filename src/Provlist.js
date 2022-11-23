@@ -20,7 +20,7 @@ function Provlist() {
 
   useEffect(()=> {
     async function fetchdata(){
-      const response = await axios.get('/api/provlist')
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/provlist`)
       const providers = await axios.get('/api/providers')
       console.log('providers: ', providers)
       settblheadings(Object.keys(response.data[0]))
