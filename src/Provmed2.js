@@ -43,7 +43,7 @@ function Provmed2() {
   const handleSubmit = async (e, topic) => {
     e.preventDefault()
     console.log("inputs", inputs)
-    await axios.put(`${process.env.REACT_APP_API_URL}/provmed2/edit`,inputs)
+    await axios.put(`${process.env.REACT_APP_API_URL}/api/provmed2/edit`,inputs)
     const updatedProvdata = provdata.map(record => {
       if (record.ID_phase === inputs.ID_phase) {
         return inputs
