@@ -21,7 +21,8 @@ function Provmed() {
   console.log(location.state)
   useEffect(()=> {
     async function fetchdata(){
-      const response = await axios.get(`/api/provmed/${location.state.medctr}`)
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/provmed/${location.state.medctr}`)
+
       console.log(response.data)
       // console.log(Object.keys(response.data))
       settblheadings(Object.keys(response.data[0]))
@@ -39,7 +40,8 @@ function Provmed() {
     if(citydata[value]){
       setprovdata(citydata[value])
     }else {
-      const response = await axios.get(`/api/provmed/${value}`)
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/provmed/${value}`)
+
       setprovdata(response.data)
       setcitydata(values => ({
         ...values,
@@ -50,7 +52,8 @@ function Provmed() {
 
   const deletemeeting = async (id) => {
     console.log(id)
-      await axios.delete('/api/deletemtg',{data:{idnewprov:id}})
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/deletemtg`,{data:{idnewprov:id}})
+
       setshowmodal(false)
       setprovdata(provdata.filter(record => record.ID !== id ))
   }

@@ -21,8 +21,8 @@ function Provmed2() {
   console.log("location:", useLocation())
   useEffect(()=> {
     async function fetchdata2(){
-      const response = await axios.get(`/api/provmed2/${location.state.ID_newprov}`)
-      const statusdrpdwn = await axios.get(`/api/provmed3Status`)
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/provmed2/${location.state.ID_newprov}`)
+      const statusdrpdwn = await axios.get(`${process.env.REACT_APP_API_URL}/api/provmed3Status`)
       console.log(statusdrpdwn)
       console.log((response.data))
       settblheadings(Object.keys(response.data[0]))
@@ -43,7 +43,7 @@ function Provmed2() {
   const handleSubmit = async (e, topic) => {
     e.preventDefault()
     console.log("inputs", inputs)
-    await axios.put(`/api/provmed2/edit`,inputs)
+    await axios.put(`/provmed2/edit`,inputs)
     const updatedProvdata = provdata.map(record => {
       if (record.ID_phase === inputs.ID_phase) {
         return inputs
@@ -55,7 +55,7 @@ function Provmed2() {
     const overallstatus = updatedProvdata.filter(prov => prov.status === "Completed" || prov.status === "Training not Provided").length===3
     console.log("overallstatus", overallstatus)
 
-      await axios.put(`/api/provmed2/completed`,{
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/provmed2/completed`,{
         status:overallstatus? "Completed":"In Progress",
         ID_newprov:updatedProvdata[0].ID_newprov
       })

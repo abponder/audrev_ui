@@ -43,8 +43,9 @@ function Provlist() {
       return provider.ProvName === inputs.provider
     })
     console.log("fullprovider", fullprovider)
-    await axios.post(`/api/addmtg`,{ ...fullprovider, reviewer:inputs.reviewer})
-    const response = await axios.get('/api/provlist')
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/addmtg`, { ...fullprovider, reviewer:inputs.reviewer})
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/provlist`)
+
     // const updatedProvdata = provdata.map(record => {
     //   console.log("record", record)
     //   if (record.ID_phase === inputs.ID_phase) {

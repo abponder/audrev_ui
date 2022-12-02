@@ -15,7 +15,7 @@ function Edulist() {
 
   useEffect(()=> {
       async function fetchdata(){
-        const response = await axios.get('/api/edulist')
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/edulist`)
         console.log('/api/edulist', response)
         // setprovdata(response.data)
         setspeclist(response.data)
