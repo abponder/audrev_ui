@@ -4,6 +4,7 @@ import Provlist from './Provlist'
 import Provmed from './Provmed'
 import Provmed2 from './Provmed2'
 import Edulist from './Edulist'
+import LineChart from './LineChart'
 import React, {
   useState,
   useEffect
@@ -71,6 +72,7 @@ function Nav() {
           </Route>
           <Route path="/opsmon">
             <p>Hello ops mon</p>
+            <LineChart />
           </Route>
           <Route exact path="/newprov">
             <Provlist />
