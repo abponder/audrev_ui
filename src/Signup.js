@@ -6,30 +6,48 @@ import React, {
   useEffect
 } from 'react';
 import {
-  Link
+  Link,
+	useHistory
 } from "react-router-dom";
 
 // https://codebrahma.com/build-table-componenet-with-react-hooks/
 //commentsss
 export default function Signup() {
+  const [creds, setCreds] = useState({});
+	const history = useHistory();
+
+	const handleSubmit = async (e) => {
+    e.preventDefault()
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, creds)
+		history.push('/login')
+  }
+
+	const handleChange = (e) => {
+		
+    const name = e.target.name;
+    const value = e.target.value;
+    setCreds(values => ({...values, [name]: value}))
+  }
+
+
   return(
-    <div class="container">
+    <div className="container">
 
-<div class="col-sm-6 col-sm-offset-3">
+<div className="col-sm-6 col-sm-offset-3">
 
-	<h1><span class="fa fa-sign-in"></span> Signup</h1>
+	<h1><span className="fa fa-sign-in"></span> Signup</h1>
 
-	<form action="/signup" method="post">
-		<div class="form-group">
+	<form onSubmit={handleSubmit}>
+		<div className="form-group">
 			<label>Username</label>
-			<input type="text" class="form-control" name="username"/>
+			<input onChange = {handleChange} type="text" className="form-control" name="username"/>
 		</div>
-		<div class="form-group">
+		<div className="form-group">
 			<label>Password</label>
-			<input type="password" class="form-control" name="password"/>
+			<input onChange = {handleChange} type="password" className="form-control" name="password"/>
 		</div>
 
-		<button type="submit" class="btn btn-warning btn-lg">Signup</button>
+		<button type="submit" className="btn btn-warning btn-lg">Signup</button>
 	</form>
 
 	<hr/>
