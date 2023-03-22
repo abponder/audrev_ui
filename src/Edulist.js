@@ -5,9 +5,12 @@ import React, {
   useState,
   useEffect
 } from 'react';
+import {
+  useLocation
+} from "react-router-dom";
 
 function Edulist() {
-
+  const location = useLocation()
   const defaultSelectValue = ["Select a Specialty"]
   const [speclist, setspeclist] = useState([]);
   const [selected, setSelected] = useState(defaultSelectValue[0])
@@ -26,6 +29,7 @@ function Edulist() {
 
   return (
     <>
+    <Nav location={location.pathname.slice(1)} />
       <h3>Specialties</h3>
       <br />
       <label name="Spec">Specialty:</label>{' '}

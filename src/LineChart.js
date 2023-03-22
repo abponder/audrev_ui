@@ -1,10 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
+import Nav from './Nav.js';
+import {
+  useLocation
+} from "react-router-dom";
 
 // *********************************************************************
 // Data.date must be provided in ASC order (ascending, oldest to newest)
 // *********************************************************************
 const LineChart = () => {
+const location = useLocation()
  const data_type="campaign_impressions"
  
  let Data = [
@@ -231,6 +236,8 @@ const LineChart = () => {
   }, [Data, data_type, width, height]); // redraw chart if data or dimensions change
 
   return (
+    <>
+    <Nav location={location.pathname.slice(1)} />
     <div ref={svgContainer} className="line-chart">
       <svg ref={svgRef} />
       <div ref={tooltipRef} className="lc-tooltip">
@@ -238,6 +245,7 @@ const LineChart = () => {
         <div className="date"></div>
       </div>
     </div>
+    </>
   );
 };
 

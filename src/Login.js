@@ -6,39 +6,57 @@ import React, {
   useEffect
 } from 'react';
 import {
-  Link
+  Link,
+	useHistory
 } from "react-router-dom";
 
 // https://codebrahma.com/build-table-componenet-with-react-hooks/
 //commentsss
 export default function Login() {
+  const [creds, setCreds] = useState({});
+	const history = useHistory();
+
+	const handleSubmit = async (e) => {
+    e.preventDefault()
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, creds)
+		history.push('/home')
+  }
+
+	const handleChange = (e) => {
+		
+    const name = e.target.name;
+    const value = e.target.value;
+    setCreds(values => ({...values, [name]: value}))
+  }
+
+
   return(
-    <div class="container">
-        <div class="col-sm-6 col-sm-offset-3">
-            <h1><span class="fa fa-sign-in"></span> Login</h1>
+    <div className="container">
 
-            <form action="/login" method="post">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" class="form-control" name="username"/>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" name="password"/>
-                </div>
-                <div class="form-group">
-                    <label>Remember Me</label>
-                    <input type="checkbox" class="form-control" name="remember" value="yes"/>
-                </div>
+<div className="col-sm-6 col-sm-offset-3">
 
-                <button type="submit" class="btn btn-warning btn-lg">Login</button>
-            </form>
+	<h1><span className="fa fa-sign-in"></span> Signup</h1>
 
-            <hr/>
+	<form onSubmit={handleSubmit}>
+		<div className="form-group">
+			<label>Username</label>
+			<input onChange = {handleChange} type="text" className="form-control" name="username"/>
+		</div>
+		<div className="form-group">
+			<label>Password</label>
+			<input onChange = {handleChange} type="password" className="form-control" name="password"/>
+		</div>
 
-            <p>Need an account? <a href="/signup">Signup</a></p>
-            <p>Or go <a href="/">home</a>.</p>
-        </div>
-    </div>
+		<button type="submit" class="btn btn-warning btn-lg">Login</button>
+	</form>
+
+	<hr/>
+
+  <p>Need an account? <a href="/signup">Signup</a></p>
+  <p>Or go <a href="/">home</a>.</p>
+
+</div>
+
+</div>
   )
 }

@@ -22,7 +22,7 @@ export default function Home() {
 
   return(
     <div className="container">
-      
+    
         <div className="jumbotron text-center">
             <h1><span className="fa fa-lock"></span> Node Authentication</h1>
 

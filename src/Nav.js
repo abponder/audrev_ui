@@ -5,6 +5,8 @@ import Provmed from './Provmed'
 import Provmed2 from './Provmed2'
 import Edulist from './Edulist'
 import LineChart from './LineChart'
+import Signup from './Signup'
+import Login from './Login'
 import React, {
   useState,
   useEffect
@@ -13,17 +15,25 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
 
 
-function Nav() {
+function Nav({location}) {
   const [responsivenav, setresponsivenav] = useState("topnav")
-  const [activelink, setactivelink] = useState("home")
+  const [activelink, setactivelink] = useState(location||"home")
+  const history = useHistory();
 
   const handleClick = (e) => {
-    console.log(e.target.id)
-    setactivelink(e.target.id)
+    console.log(e.target.id, activelink)
+    // setactivelink(e.target.id)
+    setactivelink(()=>e.target.id)
+  }
+
+  const handleLogout = async () => {
+    await axios.get(`${process.env.REACT_APP_API_URL}/api/logout`)
+    history.push('/')
   }
 
   return (
@@ -34,24 +44,24 @@ function Nav() {
      <p>This is some words, and more wordses</p>
   </div>
 
-  <Router>
+  {/* <Router> */}
   <nav className="navbar">
   <div className={responsivenav} id="myTopnav">
 
-  <Link className={activelink==="home"?"active":"notactive"} to="/home" id="home" onClick={handleClick}>Home</Link>
-    <Link className={activelink==="opsmon"?"active":"notactive"} to="/opsmon" id="opsmon" onClick={handleClick}>Operational Monitoring</Link>
-    <Link className={activelink==="newprov"?"active":"notactive"} to="/newprov" id="newprov"  onClick={handleClick}>New Provider Training</Link>
-    <Link className={activelink==="edoutreach"?"active":"notactive"} to="/edoutreach" id="edoutreach" onClick={handleClick}>Education & Outreach</Link>
-    <Link className={activelink==="appeals"?"active":"notactive"} to="/appeals" id="appeals" onClick={handleClick}>Appeals</Link>
-    <Link className={activelink==="comprpt"?"active":"notactive"} to="/comprpt" id="comprpt" onClick={handleClick}>Completion Report</Link>
-    <Link className={activelink==="region"?"active":"notactive"} to="/region" id="region" onClick={handleClick}>Region</Link>
+  <Link className={activelink==="home"?"active":"notactive"} to="/home" id="home" onClick={(e)=>setactivelink(e.target.id)}>Home</Link>
+    <Link className={activelink==="opsmon"?"active":"notactive"} to="/opsmon" id="opsmon" onClick={(e)=>setactivelink(e.target.id)}>Operational Monitoring</Link>
+    <Link className={activelink==="newprov"?"active":"notactive"} to="/newprov" id="newprov"  onClick={(e)=>setactivelink(e.target.id)}>New Provider Training</Link>
+    <Link className={activelink==="edoutreach"?"active":"notactive"} to="/edoutreach" id="edoutreach" onClick={(e)=>setactivelink(e.target.id)}>Education & Outreach</Link>
+    <Link className={activelink==="appeals"?"active":"notactive"} to="/appeals" id="appeals" onClick={(e)=>setactivelink(e.target.id)}>Appeals</Link>
+    <Link className={activelink==="comprpt"?"active":"notactive"} to="/comprpt" id="comprpt" onClick={(e)=>setactivelink(e.target.id)}>Completion Report</Link>
+    <Link className={activelink==="region"?"active":"notactive"} to="/region" id="region" onClick={(e)=>setactivelink(e.target.id)}>Region</Link>
     <div className="dropdown right">
       <button className="dropbtn">Logout/Help 
         <i className="fa fa-caret-down"></i>
       </button>
       <div className="dropdown-content">
         {/* <a href="#">Logout</a> */}
-        <Link to="/logout">Logout</Link>
+        <p onClick={handleLogout}>Logout</p>
         {/* <a href="#">Issues</a> */}
         <Link to="/issues">Issues</Link>
         {/* <a href="#">ODS Team</a> */}
@@ -66,49 +76,11 @@ function Nav() {
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/home">
-            <p>Hello World Home</p>
-          </Route>
-          <Route path="/opsmon">
-            <p>Hello ops mon</p>
-            <LineChart />
-          </Route>
-          <Route exact path="/newprov">
-            <Provlist />
-            {/* <p>Hello new Provider</p> */}
-          </Route>
-          <Route path="/edoutreach">
-            <Edulist />
-            {/* <p>Hello education and outreach</p> */}
-          </Route>
-          <Route path="/appeals">
-            <p>Hello appeals</p>
-          </Route>
-          <Route path="/comprpt">
-            <p>Hello compreport</p>
-          </Route>
-          <Route path="/region">
-            <p>Hello region</p>
-          </Route>
-          <Route path="/logout">
-            <p>Hello logout</p>
-          </Route>
-          <Route path="/issues">
-            <p>Hello issues</p>
-          </Route>
-          <Route path="/ods">
-            <p>Hello ODS Team</p>
-          </Route>
-          <Route path="/provmed">
-            <Provmed />
-          </Route>
-          <Route path="/provmed2">
-            <Provmed2 />
-          </Route>
-        </Switch>
+        {/* <Switch>
+          
+        </Switch> */}
       </div>
-  </Router>
+  {/* </Router> */}
 
 
     </div>

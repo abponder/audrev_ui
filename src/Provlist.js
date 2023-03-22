@@ -6,21 +6,25 @@ import React, {
   useEffect
 } from 'react';
 import {
-  Link
+  Link,
+  useLocation
 } from "react-router-dom";
 
 // https://codebrahma.com/build-table-componenet-with-react-hooks/
 //commentsss
 function Provlist() {
+  const location = useLocation()
+  console.log(location)
   const [provdata, setprovdata] = useState([]);
   const [providers, setproviders] = useState([]);
   const [tblheadings, settblheadings] = useState([]);
   const [showform, setshowform] = useState(false)
   const [inputs, setInputs] = useState({});
-
+console.log('testing')
   useEffect(()=> {
     async function fetchdata(){
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/provlist`)
+      console.log('response: ', response)
       const providers = await axios.get(`${process.env.REACT_APP_API_URL}/api/providers`)
       console.log('providers: ', providers)
       settblheadings(Object.keys(response.data[0]))
@@ -70,6 +74,7 @@ function Provlist() {
 
   return (
     <div>
+      <Nav location={location.pathname.slice(1)} />
       <h3>NEW PROVIDER TRAINING BY MEDICAL CENTER</h3>
     {!showform && (
       <div>

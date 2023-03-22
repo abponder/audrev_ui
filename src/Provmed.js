@@ -5,6 +5,7 @@ import React, {
   useEffect
 } from 'react';
 import {useLocation, Link} from "react-router-dom";
+import Nav from './Nav.js';
 
 //randoms
 // https://codebrahma.com/build-table-componenet-with-react-hooks/
@@ -18,7 +19,7 @@ function Provmed() {
   const [curritem, setcurritem] = useState([]);
   const [citydata, setcitydata] = useState({});
  // console.log('test')
-  console.log(location.state)
+  console.log(location.pathname)
   useEffect(()=> {
     async function fetchdata(){
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/provmed/${location.state.medctr}`)
@@ -59,6 +60,8 @@ function Provmed() {
   }
 
   return (
+    <>
+    <Nav />
     <div>
       <br></br>
       <h3>NEW PROVIDER TRAINING BY MEDICAL CENTER</h3>
@@ -130,6 +133,7 @@ function Provmed() {
 
 
     </div>
+    </>
   );
 }
 

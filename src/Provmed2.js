@@ -5,6 +5,7 @@ import React, {
   useEffect
 } from 'react';
 import {useLocation, Link} from "react-router-dom";
+import Nav from './Nav.js';
 
 
 // https://codebrahma.com/build-table-componenet-with-react-hooks/
@@ -73,6 +74,8 @@ function Provmed2() {
   }
 
   return (
+    <>
+    <Nav />
     <div>
       <br></br>
       <h3>NEW PROVIDER TRAINING BY PHASE</h3>
@@ -172,6 +175,7 @@ function Provmed2() {
 </table>}
      
     </div>
+    </>
   );
 }
 
