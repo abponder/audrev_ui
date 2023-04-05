@@ -14,12 +14,17 @@ import {
 //commentsss
 export default function Login() {
   const [creds, setCreds] = useState({});
+	const [err, setErr] = useState(null);
 	const history = useHistory();
 
 	const handleSubmit = async (e) => {
     e.preventDefault()
-    await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, creds)
-		history.push('/home')
+    try{	
+			const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, creds)	
+			history.push('/')
+		}catch(e){
+			setErr(true)
+		}
   }
 
 	const handleChange = (e) => {
@@ -49,7 +54,7 @@ export default function Login() {
 
 		<button type="submit" class="btn btn-warning btn-lg">Login</button>
 	</form>
-
+		{err && <p>login credentials incorrect</p>}
 	<hr/>
 
   <p>Need an account? <a href="/signup">Signup</a></p>

@@ -14,16 +14,22 @@ import {
 //commentsss
 export default function Signup() {
   const [creds, setCreds] = useState({});
+	const [err, setErr] = useState(null);
 	const history = useHistory();
 
 	const handleSubmit = async (e) => {
     e.preventDefault()
-    await axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, creds)
-		history.push('/login')
+		try{	
+			const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, creds)	
+			history.push('/home')
+		}catch(e){
+			setErr(true)
+		}
+    
+		
   }
 
 	const handleChange = (e) => {
-		
     const name = e.target.name;
     const value = e.target.value;
     setCreds(values => ({...values, [name]: value}))
@@ -49,7 +55,7 @@ export default function Signup() {
 
 		<button type="submit" className="btn btn-warning btn-lg">Signup</button>
 	</form>
-
+		{err && <p>user name is taken</p>}
 	<hr/>
 
 	<p>Already have an account? <a href="/login">Login</a></p>
